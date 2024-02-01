@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Hospital.Library.DAL
+namespace Hospital.Library.Entities
 {
     [Table("tblCity")]
     public class City:BaseEntity
@@ -13,5 +8,6 @@ namespace Hospital.Library.DAL
         public string Name { get; set; } = default!;
         public int CountryId { get; set; }
         public Country? Country { get; set; }
+        public ICollection<Person>? Persons { get; set; }
     }
 }

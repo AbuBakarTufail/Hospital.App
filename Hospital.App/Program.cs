@@ -1,4 +1,6 @@
 using Hospital.Library.DAL;
+using Hospital.Library.Entities;
+using Hospital.Library.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,7 @@ builder.Services.AddDbContext<HmsContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnect"));
 });
+builder.Services.AddScoped<ICity, CityDal>();
 
 var app = builder.Build();
 

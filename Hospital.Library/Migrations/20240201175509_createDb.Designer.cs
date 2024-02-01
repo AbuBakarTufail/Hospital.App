@@ -4,6 +4,7 @@ using Hospital.Library.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospital.Library.Migrations
 {
     [DbContext(typeof(HmsContext))]
-    partial class HmsContextModelSnapshot : ModelSnapshot
+    [Migration("20240201175509_createDb")]
+    partial class createDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -464,7 +467,7 @@ namespace Hospital.Library.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("tblPatientTest");
+                    b.ToTable("PatientTests");
                 });
 
             modelBuilder.Entity("Hospital.Library.Entities.PatientType", b =>
@@ -493,7 +496,7 @@ namespace Hospital.Library.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblPatientType");
+                    b.ToTable("PatientTypes");
                 });
 
             modelBuilder.Entity("Hospital.Library.Entities.Person", b =>
