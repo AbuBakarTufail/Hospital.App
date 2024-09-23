@@ -13,5 +13,6 @@ namespace Hospital.Library.Entities
         public int DoctorEmployeeId { get; set; }
         public int UserTypeId { get; set; }        
         public UserType? UserType { get; set; }
+        public bool IsMarried { get; set; }
     }
 }
