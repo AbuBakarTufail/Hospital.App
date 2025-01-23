@@ -11,13 +11,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-string dbConnection = builder.Configuration.GetConnectionString("DbConnect");
+string? dbConnection = builder.Configuration.GetConnectionString("DbConnect");
 builder.Services.AddDbContext<HmsContext>(opt =>
 {
     opt.UseSqlServer(dbConnection);
     opt.UseSqlServer(dbConnection, b => b.MigrationsAssembly("Hospital.App"));
 });
 builder.Services.AddScoped<ICity, CityDal>();
+builder.Services.AddScoped<ICountry, CountryDal>();
 
 var app = builder.Build();
 

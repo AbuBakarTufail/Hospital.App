@@ -2,11 +2,6 @@
 using Hospital.Library.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hospital.Library.DAL
 {
@@ -82,7 +77,5 @@ namespace Hospital.Library.DAL
             }
             return await context.SaveChangesAsync() > 0;
         }
-
-
     }
 }
