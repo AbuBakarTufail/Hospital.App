@@ -2,13 +2,11 @@
 using Hospital.Library.Entities;
 using Hospital.Library.Helper;
 using Hospital.Library.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
 
 namespace Hospital.App.Controllers.Configuration;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class CountryController : ControllerBase
 {
@@ -76,7 +74,7 @@ public class CountryController : ControllerBase
     public async Task<IActionResult> SaveCountry(CountryModel model)
     {
         bool isSaved = false;
-        if (model != null) 
+        if (model != null)
         {
             Country country = new()
             {
@@ -89,8 +87,8 @@ public class CountryController : ControllerBase
         }
         else
         {
-                return NotFound(Common.NotFoundErrorMessage);
-            }
+            return NotFound(Common.NotFoundErrorMessage);
+        }
         return Ok(isSaved);
     }
 
@@ -102,7 +100,7 @@ public class CountryController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteCountry(List<int> countryIds)
+    public async Task<IActionResult> DeleteCountries(List<int> countryIds)
     {
         bool isDeleted = await countryDal.DeleteCountries(countryIds);
         return Ok(isDeleted);

@@ -4,7 +4,18 @@ using Hospital.Library.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors
+    (opt =>
+    {
+        opt.AddDefaultPolicy(builder =>
+        {
+            builder.WithOrigins("http://localhost:4200")
+            .SetIsOriginAllowedToAllowWildcardSubdomains()
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+        });
+    });
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -19,6 +30,7 @@ builder.Services.AddDbContext<HmsContext>(opt =>
 });
 builder.Services.AddScoped<ICity, CityDal>();
 builder.Services.AddScoped<ICountry, CountryDal>();
+builder.Services.AddScoped<IDepartment, DepartmentDal>();
 
 var app = builder.Build();
 
@@ -26,7 +38,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.DocumentTitle = "Hospital App APIs";
+        c.DefaultModelsExpandDepth(-1);
+    });
 }
 
 app.UseHttpsRedirection();
@@ -35,4 +51,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseCors(x =>
+{
+    x.AllowAnyOrigin();
+    x.AllowAnyMethod();
+    x.AllowAnyHeader();
+});
 app.Run();
